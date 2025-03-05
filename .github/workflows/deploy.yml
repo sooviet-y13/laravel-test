@@ -27,11 +27,13 @@ jobs:
       # Step 4: Build the Docker image
       - name: Build Docker image
         run: |
+          cd app
           docker build -t ${{ secrets.ACR_SERVER }}/${{ secrets.CONTAINER_APP_NAME }}:latest .
 
       # Step 5: Push the image to ACR
       - name: Push Docker image to ACR
         run: |
+          cd app
           docker push ${{ secrets.ACR_SERVER }}/${{ secrets.CONTAINER_APP_NAME }}:latest
 
       # Step 6: Deploy the image to Azure Container Apps
