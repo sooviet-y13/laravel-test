@@ -43,6 +43,4 @@ jobs:
             --name ${{ secrets.CONTAINER_APP_NAME }} \
             --resource-group ${{ secrets.RESOURCE_GROUP }} \
             --image ${{ secrets.ACR_SERVER }}/${{ secrets.CONTAINER_APP_NAME }}:latest \
-            --environment ${{ secrets.CONTAINER_APP_ENVIRONMENT }} \
-            --target-port 80 \
             --ingress external
