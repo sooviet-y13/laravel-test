@@ -47,8 +47,8 @@ jobs:
           az containerapp update \
             --name ${{ secrets.CONTAINER_APP_NAME }} \
             --resource-group ${{ secrets.RESOURCE_GROUP }} \
-            --image ${{ secrets.ACR_SERVER }}/${{ secrets.CONTAINER_APP_NAME }}:${{env.IMAGE_TAG}} |
-            --env-vars \
+            --image ${{ secrets.ACR_SERVER }}/${{ secrets.CONTAINER_APP_NAME }}:${{env.IMAGE_TAG}} \
+            --set-env-vars \
                 DB_CONNECTION=pgsql \
                 DB_HOST=mypsqldb.postgres.database.azure.com \
                 DB_PORT=5432 \
