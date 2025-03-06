@@ -24,20 +24,23 @@ jobs:
         run: |
           echo ${{ secrets.ACR_PASSWORD }} | docker login ${{ secrets.ACR_SERVER }} -u ${{ secrets.ACR_USERNAME }} --password-stdin
 
-      # Step 4: Set build image tag
-      - name: Set Image Tag
-        id: vars
-        run: echo "IMAGE_TAG=$(date +%Y%m%d%H%M%S)-${{ github.sha }}" >> $GITHUB_ENV |
+      - name: Create .env file
+        run: |
           cat <<EOF > .env
           APP_ENV=production
           APP_KEY=${{ secrets.APP_KEY }}
           DB_CONNECTION=pgsql
-          DB_HOST=mypsqldb.postgres.database.azure.com \
-          DB_PORT=5432 \
-          DB_DATABASE=postgres \
-          DB_USERNAME=laraadmin@mypsqldb \
+          DB_HOST=${{ secrets.DB_HOST }}
+          DB_PORT=${{ secrets.DB_PORT }}
+          DB_DATABASE=${{ secrets.DB_DATABASE }}
+          DB_USERNAME=${{ secrets.DB_USERNAME }}
           DB_PASSWORD=${{ secrets.DB_PASSWORD }}
           EOF
+
+      # Step 4: Set build image tag
+      - name: Set Image Tag
+        id: vars
+        run: echo "IMAGE_TAG=$(date +%Y%m%d%H%M%S)-${{ github.sha }}" >> $GITHUB_ENV
 
       # Step 5: Build the Docker image
       - name: Build Docker image
