@@ -28,14 +28,14 @@ jobs:
         run: |
           cd app 
           cat <<EOF > .env
-          APP_ENV=production
+          APP_ENV="production"
           APP_KEY=${{ secrets.APP_KEY }}
-          DB_CONNECTION=pgsql \
-          DB_HOST=mypsqldb.postgres.database.azure.com \
-          DB_PORT=5432 \
-          DB_DATABASE=postgres \
-          DB_USERNAME=laraadmin@mypsqldb \
-          DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+          DB_CONNECTION="pgsql"
+          DB_HOST="mypsqldb.postgres.database.azure.com"
+          DB_PORT=5432
+          DB_DATABASE="postgres"
+          DB_USERNAME="laraadmin@mypsqldb"
+          DB_PASSWORD="${{ secrets.DB_PASSWORD }}"
           EOF
 
       # Step 4: Set build image tag
