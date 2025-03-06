@@ -26,6 +26,7 @@ jobs:
 
       - name: Create .env file
         run: |
+          cd app 
           cat <<EOF > .env
           APP_ENV=production
           APP_KEY=${{ secrets.APP_KEY }}
